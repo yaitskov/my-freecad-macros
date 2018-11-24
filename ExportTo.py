@@ -20,9 +20,20 @@ class StlExportFormat(ExportFormat):
         return 'stl'
 
 
-class StpExportFormat(StlExportFormat):
+class StpExportFormat(ExportFormat):
+    def exportTo(self, obj, destPath):
+        obj.Shape.exportStep(destPath + '.' + self.fileType())
+
     def fileType(self):
         return 'stp'
+
+
+class IgesExportFormat(ExportFormat):
+    def exportTo(self, obj, destPath):
+        obj.Shape.exportIges(destPath + '.' + self.fileType())
+
+    def fileType(self):
+        return 'iges'
 
 
 class ObjectsExporter:
